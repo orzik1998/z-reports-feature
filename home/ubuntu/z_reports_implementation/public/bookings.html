@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings Detail | Edalem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="favicon.svg" alt="Edalem Logo"> Edalem
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <button class="btn btn-outline-primary btn-sm">Add New Booking</button>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="currencyDropdown" role="button" data-bs-toggle="dropdown">
+                            Currency
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">EUR</a></li>
+                            <li><a class="dropdown-item" href="#">USD</a></li>
+                            <li><a class="dropdown-item" href="#">THB</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            Orzemes Mirzov
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 d-none d-md-block sidebar p-0">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-calendar"></i> Calendar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-building"></i> Suppliers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-tag"></i> Price
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-people"></i> Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-gear"></i> Setup
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="bi bi-file-earmark-text"></i> Reports
+                            </a>
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="sellers.html">
+                                        Z Reports for Sellers
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="cot.html">
+                                        Z Reports COT
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="paid.html">
+                                        Paid Reports
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 ms-sm-auto px-md-4">
+                <div class="content-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="h2">Bookings Detail</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Agent</a></li>
+                                <li class="breadcrumb-item"><a href="sellers.html">Z Reports for Sellers</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Bookings Detail</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary me-2" id="printBtn">
+                            <i class="bi bi-printer"></i> Print
+                        </button>
+                        <button class="btn btn-outline-primary" id="exportBtn">
+                            <i class="bi bi-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <div class="content-body">
+                    <!-- Detail Header -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="card-title" id="detailTitle">Sales for Orzik - 01/04/2025</h5>
+                                    <p class="text-muted" id="detailDescription">Showing all bookings for the selected date</p>
+                                </div>
+                                <div class="col-md-6 text-md-end">
+                                    <div class="mb-2">
+                                        <span class="badge bg-primary p-2">Total Sales: $750.00</span>
+                                    </div>
+                                    <div>
+                                        <span class="badge bg-info p-2">Discounts: $50.00</span>
+                                        <span class="badge bg-warning p-2">Refunds: $0.00</span>
+                                        <span class="badge bg-success p-2">Balance: $700.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bookings Table -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Booking ID</th>
+                                            <th>Time</th>
+                                            <th>Customer</th>
+                                            <th>Tour</th>
+                                            <th>Office</th>
+                                            <th>Amount</th>
+                                            <th>Discount</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="#" class="booking-link">BK-001</a></td>
+                                            <td>10:15</td>
+                                            <td>John D.</td>
+                                            <td>Demo Tour to James Bond Islands</td>
+                                            <td>Office 1</td>
+                                            <td>$300.00</td>
+                                            <td>$50.00</td>
+                                            <td><span class="badge bg-success">Confirmed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" class="booking-link">BK-002</a></td>
+                                            <td>14:30</td>
+                                            <td>Jane S.</td>
+                                            <td>Bangkok 1 day</td>
+                                            <td>Office 1</td>
+                                            <td>$250.00</td>
+                                            <td>$0.00</td>
+                                            <td><span class="badge bg-success">Confirmed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" class="booking-link">BK-003</a></td>
+                                            <td>16:45</td>
+                                            <td>Robert T.</td>
+                                            <td>Demo tour to Similan 2 days 1 night</td>
+                                            <td>Office 2</td>
+                                            <td>$200.00</td>
+                                            <td>$0.00</td>
+                                            <td><span class="badge bg-success">Confirmed</span></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="table-light">
+                                            <th colspan="5" class="text-end">Total:</th>
+                                            <th>$750.00</th>
+                                            <th>$50.00</th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const seller = urlParams.get('seller') || 'Orzik';
+            const date = urlParams.get('date') || '01/04/2025';
+            const type = urlParams.get('type') || 'sales';
+            
+            // Update page title and description based on type
+            const detailTitle = document.getElementById('detailTitle');
+            const detailDescription = document.getElementById('detailDescription');
+            
+            switch(type) {
+                case 'sales':
+                    detailTitle.textContent = `Sales for ${seller} - ${date}`;
+                    detailDescription.textContent = 'Showing all bookings for the selected date';
+                    break;
+                case 'discounts':
+                    detailTitle.textContent = `Discounts for ${seller} - ${date}`;
+                    detailDescription.textContent = 'Showing all bookings with discounts for the selected date';
+                    break;
+                case 'refunds':
+                    detailTitle.textContent = `Refunds for ${seller} - ${date}`;
+                    detailDescription.textContent = 'Showing all canceled bookings for the selected date';
+                    break;
+                case 'balance':
+                    detailTitle.textContent = `All Bookings for ${seller} - ${date}`;
+                    detailDescription.textContent = 'Showing all bookings with balance information for the selected date';
+                    break;
+            }
+            
+            // Handle print button
+            document.getElementById('printBtn').addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Handle export button
+            document.getElementById('exportBtn').addEventListener('click', function() {
+                alert('Exporting data to CSV...');
+            });
+            
+            // Handle booking links
+            const bookingLinks = document.querySelectorAll('.booking-link');
+            bookingLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const bookingId = this.textContent;
+                    alert(`Opening booking details for ${bookingId}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

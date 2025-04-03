@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z Reports COT | Edalem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="favicon.svg" alt="Edalem Logo"> Edalem
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <button class="btn btn-outline-primary btn-sm">Add New Booking</button>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="currencyDropdown" role="button" data-bs-toggle="dropdown">
+                            Currency
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">EUR</a></li>
+                            <li><a class="dropdown-item" href="#">USD</a></li>
+                            <li><a class="dropdown-item" href="#">THB</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            Orzemes Mirzov
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 d-none d-md-block sidebar p-0">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-calendar"></i> Calendar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-building"></i> Suppliers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-tag"></i> Price
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-people"></i> Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-gear"></i> Setup
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="bi bi-file-earmark-text"></i> Reports
+                            </a>
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="sellers.html">
+                                        Z Reports for Sellers
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="cot.html">
+                                        Z Reports COT
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="paid.html">
+                                        Paid Reports
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 ms-sm-auto px-md-4">
+                <div class="content-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="h2">Z Reports COT</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Agent</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Z Reports COT</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="content-body">
+                    <!-- Filters -->
+                    <div class="filter-card mb-4">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="dateRange" class="form-label">Period</label>
+                                <input type="text" class="form-control" id="dateRange" placeholder="Select date range">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="tourSelect" class="form-label">Tour</label>
+                                <select class="form-select" id="tourSelect">
+                                    <option value="all">All Tours</option>
+                                    <option value="1">Demo Tour to James Bond Islands</option>
+                                    <option value="2">Bangkok 1 day</option>
+                                    <option value="3">Demo tour to Similan 2 days 1 night</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="supplierSelect" class="form-label">Supplier</label>
+                                <select class="form-select" id="supplierSelect">
+                                    <option value="all">All Suppliers</option>
+                                    <option value="1">Supplier A</option>
+                                    <option value="2">Supplier B</option>
+                                    <option value="3">Supplier C</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 mb-3 d-flex align-items-end">
+                                <button class="btn btn-primary w-100">Apply Filters</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div class="summary-card mb-4">
+                        <h5 class="card-title mb-3">Summary for April 1-2, 2025</h5>
+                        <div class="row">
+                            <div class="col-md-3 summary-item">
+                                <h3>8</h3>
+                                <p>Total Bookings</p>
+                            </div>
+                            <div class="col-md-3 summary-item">
+                                <h3>$1,750.00</h3>
+                                <p>Total Sales</p>
+                            </div>
+                            <div class="col-md-3 summary-item">
+                                <h3>$75.00</h3>
+                                <p>Total Discounts</p>
+                            </div>
+                            <div class="col-md-3 summary-item">
+                                <h3>$100.00</h3>
+                                <p>Total Refunds</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COT Reports Table -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title mb-0">COT Reports</h5>
+                                <div>
+                                    <button class="btn btn-outline-primary me-2">
+                                        <i class="bi bi-printer"></i> Print Report
+                                    </button>
+                                    <button class="btn btn-outline-secondary">
+                                        <i class="bi bi-download"></i> Export
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Tour</th>
+                                            <th>Supplier</th>
+                                            <th>Bookings</th>
+                                            <th>Sale Amount</th>
+                                            <th>Discounts</th>
+                                            <th>Refunds</th>
+                                            <th>Net Amount</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="tour-row">
+                                            <td class="tour-cell">
+                                                <span class="d-flex align-items-center">
+                                                    Demo Tour to James Bond Islands
+                                                    <i class="bi bi-chevron-down ms-2 toggle-details"></i>
+                                                </span>
+                                            </td>
+                                            <td>Supplier A</td>
+                                            <td>3</td>
+                                            <td>$900.00</td>
+                                            <td>$50.00</td>
+                                            <td>$0.00</td>
+                                            <td>$850.00</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary me-1">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="bi bi-printer"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="details-row d-none">
+                                            <td colspan="8">
+                                                <div class="p-3">
+                                                    <h6>Booking Details</h6>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Booking ID</th>
+                                                                    <th>Date</th>
+                                                                    <th>Customer</th>
+                                                                    <th>Seller</th>
+                                                                    <th>Amount</th>
+                                                                    <th>Discount</th>
+                                                                    <th>Status</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>BK-001</td>
+                                                                    <td>01/04/2025</td>
+                                                                    <td>John D.</td>
+                                                                    <td>Orzik</td>
+                                                                    <td>$300.00</td>
+                                                                    <td>$50.00</td>
+                                                                    <td><span class="badge bg-success">Confirmed</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>BK-005</td>
+                                                                    <td>02/04/2025</td>
+                                                                    <td>Sarah M.</td>
+                                                                    <td>Orzik</td>
+                                                                    <td>$300.00</td>
+                                                                    <td>$0.00</td>
+                                                                    <td><span class="badge bg-success">Confirmed</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>BK-006</td>
+                                                                    <td>02/04/2025</td>
+                                                                    <td>David K.</td>
+                                                                    <td>orzik2</td>
+                                                                    <td>$300.00</td>
+                                                                    <td>$0.00</td>
+                                                                    <td><span class="badge bg-success">Confirmed</span>
+(Content truncated due to size limit. Use line ranges to read in chunks)

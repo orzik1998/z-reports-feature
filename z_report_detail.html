@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z Report Detail | Edalem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #f97316;
+            --light-bg: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .sidebar {
+            background-color: white;
+            border-right: 1px solid var(--border-color);
+            height: calc(100vh - 56px);
+        }
+        
+        .sidebar .nav-link {
+            color: #334155;
+            padding: 0.8rem 1rem;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar .nav-link:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .sidebar .nav-link.active {
+            color: var(--primary-color);
+            border-left: 3px solid var(--primary-color);
+            background-color: #eff6ff;
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        
+        .content-header {
+            background-color: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem;
+        }
+        
+        .content-body {
+            padding: 1.5rem;
+        }
+        
+        .card {
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .table th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background-color: #10b981;
+        }
+        
+        .badge-warning {
+            background-color: #f59e0b;
+        }
+        
+        .report-header {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .report-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .report-info-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .report-info-item strong {
+            display: inline-block;
+            width: 150px;
+        }
+        
+        .summary-section {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .summary-item {
+            text-align: center;
+            padding: 1rem;
+            border-right: 1px solid var(--border-color);
+        }
+        
+        .summary-item:last-child {
+            border-right: none;
+        }
+        
+        .summary-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .summary-item p {
+            color: #64748b;
+            margin-bottom: 0;
+        }
+        
+        .transaction-section {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="favicon.svg" alt="Edalem Logo"> Edalem
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <button class="btn btn-outline-primary btn-sm">Add New Booking</button>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="currencyDropdown" role="button" data-bs-toggle="dropdown">
+                            Currency
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">EUR</a></li>
+                            <li><a class="dropdown-item" href="#">USD</a></li>
+                            <li><a class="dropdown-item" href="#">THB</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            Orzemes Mirzov
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 d-none d-md-block sidebar p-0">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-calendar"></i> Calendar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-building"></i> Suppliers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-tag"></i> Price
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-people"></i> Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-gear"></i> Setup
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="bi bi-file-earmark-text"></i> Reports
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 ms-sm-auto px-md-4">
+                <div class="content-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="h2">Z Report Detail</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Agent</a></li>
+                                <li class="breadcrumb-item"><a href="z_reports_list.html">Z Reports</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">ZR-001</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary me-2">
+                            <i class="bi bi-printer"></i> Print
+                        </button>
+                        <button class="btn btn-primary">
+                            <i class="bi bi-file-earmark-pdf"></i> Download PDF
+                        </button>
+                    </div>
+                </div>
+
+                <div class="content-body">
+                    <!-- Report Header -->
+                    <div class="report-header">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3 class="mb-0">Z Report: ZR-001</h3>
+                            <span class="badge bg-success px-3 py-2">Completed</span>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="report-info-item">
+                                    <strong>Seller:</strong> Orzik (ID: 411)
+                                </div>
+                                <div class="report-info-item">
+                                    <strong>Date Range:</strong> 01/04/2025 - 01/04/2025
+                                </div>
+                                <div class="report-info-item">
+                                    <strong>Report Type:</strong> Standard Z Report
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <div class="report-info-item">
+                                    <strong>Generated On:</strong> 01/04/2025 23:59:00
+                                </div>
+                                <div class="report-info-item">
+                                    <strong>Generated By:</strong> System (End of Day)
+                                </div>
+                                <div class="report-info-item">
+                                    <strong>Currency:</strong> USD
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Section -->
+                    <div class="summary-section">
+                        <h4 class="mb-4">Financial Summary</h4>
+                        <div class="row">
+                            <div class="col-md-3 summary-item">
+                                <h3>3</h3>
+                                <p>Total Bookings</p>
+                            </div>
+                            <div class="col-md-3 summary-item">
+                                <h3>$750.00</h3>
+                                <p>Total Sales</p>
+                            </div>
+                            <div class="col-md-3 summary-item">
+                                <h3>$112.50</h3>
+                                <p>Commission Earned</p>
+                            </div>
+                            <div class="col-md-3 summary-item">
+                                <h3>$637.50</h3>
+                                <p>Net Revenue</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Sales Distribution</h4>
+                            <div class="chart-container">
+                                <canvas id="salesDistributionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transaction Details -->
+                    <div class="transaction-section">
+                        <h4 class="mb-4">Transaction Details</h4>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Transaction ID</th>
+                                        <th>Tour</th>
+                                        <th>Customer</th>
+                                        <th>Payment Method</th>
+                                        <th>Amount</th>
+                                        <th>Commission</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>10:15</td>
+                                        <td>TRX-20250401-001</td>
+                                        <td>Demo Tour to James Bond Islands</td>
+                                        <td>John D.</td>
+                                        <td>Credit Card</td>
+                                        <td>$300.00</td>
+                                        <td>$45.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14:30</td>
+                                        <td>TRX-20250401-002</td>
+                                        <td>Bangkok 1 day</td>
+                                        <td>Jane S.</td>
+                                        <td>PayPal</td>
+                                        <td>$250.00</td>
+                                        <td>$37.50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16:45</td>
+                                        <td>TRX-20250401-003</td>
+                                        <td>Demo tour to Similan 2 days 1 night</td>
+                                        <td>Robert T.</td>
+                                        <td>Bank Transfer</td>
+                                        <td>$200.00</td>
+                                        <td>$30.00</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="table-light">
+                                        <th colspan="5" class="text-end">Total:</th>
+                                        <th>$750.00</th>
+                                        <th>$112.50</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method Summary -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Payment Method Summary</h4>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Payment Method</th>
+                                            <th>Transaction Count</th>
+                                            <th>Total Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Credit Card</td>
+                                            <td>1</td>
+                                            <td>$300.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>PayPal</td>
+                                            <td>1</td>
+                                            <td>$250.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bank Transfer</td>
+                                            <td>1</td>
+                                            <td>$200.00</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="table-light">
+                                            <th>Total:</th>
+                                            <th>3</th>
+                                            <th>$750.00</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Section -->
+                    <div class="footer-section">
+                        <p class="mb-1">Report ID: ZR-001</p>
+                        <p class="mb-1">Generated on: 01/04/2025 23:59:00</p>
+                        <p class="mb-0">This is an official financial document. Please retain for your records.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sales Distribution Chart
+            const distributionCtx = document.getElementById('salesDistributionChart').getContext('2d');
+            const distributionChart = new Chart(distributionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Demo Tour to James Bond Islands', 'Bangkok 1 day', 'Demo tour to Similan 2 days 1 night'],
+                    datasets: [{
+                        label: 'Sales Amount',
+                        data: [300, 250, 200],
+                        backgroundColor: 'rgba(99, 102, 241, 0.7)',
+                        borderColor: 'rgba(99, 102, 241, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Commission',
+                        data: [45, 37.5, 30],
+                        backgroundColor: 'rgba(249, 115, 22, 0.7)',
+                        borderColor: 'rgba(249, 115, 22, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount ($)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Tour'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
